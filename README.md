@@ -1,2 +1,2 @@
 # Portfolio-v2
-Version 2 of my portfolio website
+Version two of my portfolio website
