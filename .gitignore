@@ -21,3 +21,12 @@ node_modules/
 *.log
 *.sql
 *.sqlite
+
+wp-admin/
+wp-includes/
+wp-*.php
+!wp-config.php
+/index.php
+license.txt
+readme.html
+xmlrpc.php
