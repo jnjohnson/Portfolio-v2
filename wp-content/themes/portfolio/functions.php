@@ -1,29 +1,5 @@
 <?php
-require 'functions/wordpress-options.php';
-require 'functions/images.php';
-require 'functions/editor-classes.php';
-
-function get_page_for_page_template($template) {
-	$pages = get_pages(array(
-		'meta_key' => '_wp_page_template',
-		'meta_value' => $template,
-		'hierarchical' => false
-	));
-	foreach($pages as $page){
-		return $page;
-	}
-	return false;
-}
-
-function get_url_for_page_template($template) {
-	$page = get_page_for_page_template($template);
-	if ($page) {
-		return get_permalink($page->ID);
-	}
-
-	return "";
-}
-
+require 'functions/recipes.php';
 
 class ftheme {
 	function __construct() {
@@ -72,8 +48,6 @@ class ftheme {
       	wp_register_script('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js');
 		wp_enqueue_script('jquery', '', array(), false, true);
 
-
-		self::add_script('lib.js');
 		self::add_script('script.js');
 	}
 
