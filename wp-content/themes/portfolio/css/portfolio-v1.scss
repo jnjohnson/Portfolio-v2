@@ -1,0 +1,306 @@
+$dark-gray:     #2c2c2c;
+$orange-red:    #8f4842;
+$midnight-blue: #2e3542;
+$gray-pink:     #83707b;
+$light-gray:    #ebebeb;
+
+* {
+    padding: 0px;
+    margin: 0px;
+
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Dosis', sans-serif;
+}
+
+h1 {
+    @media (min-width: 576px){
+        font-size: 3rem;
+    }
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h1, h2, h3 {
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.abs-center-elements {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.navbar {
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+}
+
+.resume-link {
+    padding: 0.5rem 0rem;
+    display: block;
+    color: white;
+
+    @media (min-width: 576px) {
+        padding: 0.5rem;
+    }
+}
+
+.resume-link:hover{
+    color: rgba(255,255,255,.75);
+    text-decoration: none;
+}
+
+.hero-image {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background: no-repeat center center url("../images/hero-background.png");
+    background-size: cover;
+
+    overflow: hidden;
+}
+
+.hero-section {
+    height: 100vh;
+}
+
+.hero-text {
+    top: 100px;
+
+    h1 {
+        margin-top: 15px;
+    }
+
+    h1, h2 {
+        color: white;
+    }
+
+    @media (max-height: 400px) {
+        top: 70px;
+    }
+
+    @media (min-width: 576px) and (orientation: portrait), (min-width: 992px){
+        top: 208px;
+
+        h1 {
+            margin-top: 30px;
+        }
+    }
+}
+
+.button {
+    outline: none;
+    background: transparent;
+    border: 3px solid white;
+    color: white;
+    cursor: pointer;
+    transition: background 0.75s ease, color 0.75s ease;
+}
+
+.button:hover {
+    background: white;
+    color: black;
+    text-decoration: none;
+}
+
+.hero-button {
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    padding: 25px 38px;
+    width: 266px;
+
+    bottom: 50px;
+
+    @media (max-height: 400px) {
+        bottom: 25px;
+    }
+
+    @media (min-width: 576px) and (orientation: portrait), (min-width: 992px){
+        bottom: 186px;
+    }
+}
+
+.section {
+    padding: 48px 0px;
+
+    @media (min-width: 576px) {
+        padding: 75px 0px;
+    }
+
+    @media (min-width: 1200px) {
+        min-height: 100vh;
+    }
+    
+}
+
+.headshot {
+    @media (min-width: 767px) {
+        width: calc(300px * 1.5);
+        height: calc(259px * 1.5);
+    }
+
+    @media (min-width: 1200px), (orientation: landscape){
+        width: 300px;
+        height: 259px;
+    }
+}
+
+.social-link {
+    width: 90px;
+    height: 90px;
+    padding: 17px;
+
+    border: 3px solid $orange-red;
+    transition: background-color 1s ease;
+
+    img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.social-link:hover {
+    background-color: $orange-red;
+    cursor: pointer;
+}
+
+.skill-box {
+    display: inline-block;
+
+    border: 1px solid $orange-red;
+    padding: 10px;
+    margin: 5px 0 0 0px;
+}
+
+.bg-gray {
+    background-color: $light-gray;
+}
+
+.bg-dark-gray {
+    background-color: $dark-gray;
+}
+
+.bg-dark-blue {
+    background-color: $midnight-blue;
+}
+
+.work-border {
+    border-top: 3px solid $midnight-blue;
+    margin-top: 40px;
+
+    padding: 30px 0px 0px 0px;
+
+    @media (min-width: 576px) {
+        border: 3px solid $midnight-blue;
+        padding: 30px 0px;
+    }
+
+    @media (min-width: 1200px) {
+        padding: 20px 0px;
+    }
+}
+
+.work-link {
+    color: inherit;
+}
+
+.work-link:hover{
+    text-decoration: none;
+    color: inherit;
+}
+
+.technologies {
+    margin: 45px 0 30px 0;
+    text-transform: uppercase;
+
+    @media (min-width: 1200px) {
+        position: absolute;
+        bottom: 0;
+
+        margin: 0px;
+    }
+
+    p {
+        margin-bottom: 0.5rem;
+    }
+
+    .technology-box {
+        color: white;
+        background-color: $midnight-blue;
+        display: inline-block;
+
+        font-size: 0.75rem;
+        padding: 7px 12px;
+        margin-bottom: 6px;
+        margin-right: 2px;
+        letter-spacing: 2px;
+    }
+}
+
+.contact {
+    padding: 75px 0px;
+    color: white;
+
+    @media (min-width: 1200px) {
+        min-height: 60vh;
+    }
+
+    h2 {
+        color: $light-gray;
+    }
+}
+
+.contact-form {
+    width: 100%;
+    margin-top: 70px;
+
+    .form-item {
+        width: 100%;
+        background-color: $light-gray;
+        color: $dark-gray;
+
+        border: none;
+        margin-bottom: 5px;
+        padding-left: 15px;
+
+        @media (min-width: 576px){
+            width: 500px;
+        }
+    }
+}
+
+.submit-button-container {
+    width: 100%;
+    height: 70px;
+
+    @media (min-width: 576px){
+        width: 500px;
+    }
+}
+
+.submit-button {
+    padding: 20px 40px;
+    float: right;
+}
+
+textarea.form-item {
+    height: 178px;
+}
+
+.footer-section {
+    min-height: 15vh;
+    color: white;
+}
