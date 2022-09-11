@@ -1,0 +1,31 @@
+* {
+	-webkit-appearance: none;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-text-size-adjust: none;
+	margin: 0;
+	padding: 0;
+}
+select {
+	-webkit-appearance: menulist;
+}
+input[type="radio"] {
+	-webkit-appearance: radio;
+}
+input[type="checkbox"] {
+	-webkit-appearance: checkbox;
+}
+
+img {
+	border: none;
+}
+a{
+	text-decoration: none;
+	color: inherit;
+}
+input,button,textarea{
+	border-radius: 0;
+}
+#wpadminbar {
+	position: fixed !important;
+	top: 0 !important;
+}
