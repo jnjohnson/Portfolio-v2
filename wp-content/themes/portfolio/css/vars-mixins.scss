@@ -1,61 +1,23 @@
 /* colors and fonts here */
+$o: 'Open Sans', sans-serif;
+$d: 'Dosis', sans-serif;
 
-@mixin clearfix() {
-	&:after {
-		content: ' ';
-		display: block;
-		clear: both;
-	}
-}
-@mixin transform($val...) {
-	-webkit-transform: $val;
-	-moz-transform: $val;
-	-ms-transform: $val;
-	transform: $val;
-}
-@mixin transform_origin($val) {
-	-webkit-transform-origin: $val;
-	-moz-transform-origin: $val;
-	-ms-transform-origin: $val;
-	transform-origin: $val;
-}
-@mixin transition($val...){
-	-webkit-transition: $val;
-	-ms-transition: $val;
-	-moz-transition: $val;
-	transition: $val;
-}
-@mixin placeholder() {
-	&::-webkit-input-placeholder {
-		@content;
-	}
-	&::-moz-placeholder {
-		@content;
-	}
-	&:-ms-input-placeholder {
-		@content;
-	}
-}
-@mixin box_shadow($value){
-	-webkit-box-shadow: $value;
-	-moz-box-shadow: $value;
-	box-shadow: $value;
-}
-@mixin noselect() {
-	-webkit-user-select: none;  /* Chrome all / Safari all */
-	-moz-user-select: none;     /* Firefox all */
-	-ms-user-select: none;      /* IE 10+ */
-	user-select: none;          /* Likely future */
-}
-@mixin enable_hardware_acceleration {
-	@include transform(translate3d(0,0,0));
-	-webkit-backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
-	-ms-backface-visibility: hidden;
-	backface-visibility: hidden;
+$white: #fff;
+$black: #000;
 
-	-webkit-perspective: 1000;
-	-moz-perspective: 1000;
-	-ms-perspective: 1000;
-	perspective: 1000;
+// nav height
+$nh: 56px;
+
+$mobile_width: 800px;
+
+@mixin mobile_width {
+    @include max_width($mobile_width) {
+        @content;
+    }
+}
+
+@mixin max_width($width) {
+    @media only screen and (max-width: $width) {
+        @content;
+    }
 }
