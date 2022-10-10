@@ -1,3 +1,5 @@
+var interval = 0;
+
 jQuery('#search').submit(function(e) {
     e.preventDefault();
     var data = jQuery('#search').serializeArray();
@@ -35,39 +37,65 @@ function do_query(url, append = false) {
     if (last_query) {
         last_query.abort();
     }
+    jQuery('.recipes').addClass('loading');
+    setTimeout(function() {
+        if (append) {
+            last_query = jQuery.get(
+                url,
+                {},
+                function (html) {
+                    jQuery('.next-page').remove();
+                    var start = html.indexOf('<div class="recipes recipes-start">') + '<div class="recipes recipes-start">'.length;
+                    var end = html.indexOf('<div class="recipes-end"></div>');
+                    var recipes = html.substring(start, end);
+                    jQuery('.recipes').append(recipes);
+                    loadMoreInterval();
+                },
+                "html"
+            );
+        } else {
+            jQuery("body,html").animate({
+                scrollTop: jQuery('.recipes-start').offset().top - 200
+            }, 500);
+    
+            last_query = jQuery.get(
+                url,
+                {},
+                function (html) {
+                    var start = html.indexOf('<div class="recipes recipes-start">') + '<div class="recipes recipes-start">'.length;
+                    var end = html.indexOf('<div class="recipes-end"></div>');
+                    var recipes = html.substring(start, end);
+                    
+                    jQuery('.recipes').html(recipes);
 
-    if (append) {
-        last_query = jQuery.get(
-            url,
-            {},
-            function (html) {
-                append_content(html);
-            },
-            "html"
-        );
-    } else {
-        jQuery("body,html").animate({
-            scrollTop: jQuery('.recipes-start').offset().top - 200
-        }, 500);
-
-        last_query = jQuery.get(
-            url,
-            {},
-            function (html) {
-                var start = html.indexOf('<div class="recipes recipes-start">') + '<div class="recipes recipes-start">'.length;
-                var end = html.indexOf('<div class="recipes-end"></div>');
-                var recipes = html.substring(start, end);
-                
-                jQuery('.recipes').html(recipes);
-            },
-            "html"
-        );
-    }
+                },
+                "html"
+            );
+        }
+        jQuery('.recipes').removeClass('loading');
+    }, 750);
 }
 
 jQuery('label input').change(function() {
     jQuery('#search').submit();
 });
+
+function loadMoreInterval() {
+    interval = setInterval(function() {
+        if (jQuery('.next-page').length != 0) {
+            const windowTop = jQuery(document).scrollTop();
+            const windowBottom = windowTop + jQuery(window).height();
+            const nextPagePos = jQuery('.next-page').offset().top;
+    
+            if (nextPagePos >= windowTop && nextPagePos <= windowBottom) {
+                clearInterval(interval);
+                url = jQuery('.next-page').attr('href');
+                do_query(url, true);
+            }
+        }
+    }, 300);
+    console.debug(interval);
+}
 
 // FILTER DROPDOWN
 jQuery('.filter p').click(function() {
@@ -81,3 +109,5 @@ jQuery('.filter p').click(function() {
 
     div.animate({height: height});
 });
+
+loadMoreInterval();

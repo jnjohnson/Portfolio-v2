@@ -2,6 +2,7 @@
     /*
         Template Name: Recipes Archive
     */
+    global $wp_query;
     ftheme::add_script('recipes.js');
 	get_header();
 
@@ -76,10 +77,15 @@
                             echo '</div>'; // meta
                         echo '</a>'; // recipe
                     }
+                    $next_page_url = get_next_posts_page_link($wp_query->max_num_pages);
+                    
+                    if (!empty($next_page_url)) {
+                        echo '<a class="next-page" href="'.$next_page_url.'">Next Page</a>';
+                    }
                 } else {
                     echo <<<EOS
                     <div class="error-wrap">
-                        <h2 class="error">Sorry, I couldn't find any recipes. Try using a different filter</h2>
+                        <h2 class="error">Sorry, there aren't any recipes. Try using a different filter</h2>
                         <a class="reset-btn" href="/recipes">Reset Filters</a>
                     </div>
                     EOS;

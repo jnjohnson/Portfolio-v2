@@ -64,6 +64,8 @@
             $saved_post = get_post($post_id);
             if ($saved_post->post_type != 'recipes') {
                 return;
+            } else if (get_field('editing', $post_id)) {
+                return;
             }
 
             // Checks if the image was updated when the post was saved
@@ -134,15 +136,18 @@
         }
 
         public function filter_posts($query) {
-            $tax_query = array('relation' => 'AND');
-            foreach ($_GET as $key => $val) {
-                array_push($tax_query, array(
-                    'taxonomy'  => $key,
-                    'field'     => 'slug',
-                    'terms'     => explode(',', $val),
-                ));
+            if (!is_admin() && $query->is_main_query()) {
+                $tax_query = array('relation' => 'AND');
+                foreach ($_GET as $key => $val) {
+                    array_push($tax_query, array(
+                        'taxonomy'  => $key,
+                        'field'     => 'slug',
+                        'terms'     => explode(',', $val),
+                    ));
+                }
+                $query->set('tax_query', $tax_query);
+                $query->set('posts_per_page', 9);
             }
-            $query->set('tax_query', $tax_query);
         }
 
         public static function build_source_string($terms) {
