@@ -200,11 +200,6 @@
             }
         }
 
-        @include tablet_width {
-            .hero-image {
-                // background-image: linear-gradient(135deg, #dd6c1d 10vw, #742461 80vw, #0039ab 150vw, #22365d 200vw)
-            }
-        }
         @include mobile_width {
             .hero-image {
                 background-image: linear-gradient(135deg, #dd6c1d 30vw, #742461 100vw, #0039ab 170vw, #22365d 230vw);

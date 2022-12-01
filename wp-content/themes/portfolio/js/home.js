@@ -6,7 +6,6 @@ async function heroAnimation() {
     var array = htmlString.split(/\r\n|\r|\n/g);
     var ide = jQuery('.hero .ide-screen');
 
-    // bypassAnimation();
     jQuery('.hero .down-arrow').click(async function() {
         bypassAnimation();
         if (jQuery(window).width() <= 1040) {
