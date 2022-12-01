@@ -24,7 +24,6 @@ node_modules/
 wp-admin/
 wp-includes/
 wp-*.php
-!wp-config.php
 /index.php
 license.txt
 readme.html
