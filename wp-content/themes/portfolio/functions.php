@@ -1,5 +1,6 @@
 <?php
 require 'functions/recipes.php';
+require 'functions/images.php';
 
 class ftheme {
 	function __construct() {
@@ -81,3 +82,39 @@ class ftheme {
 
 new ftheme();
 
+function build_project($post) {
+    if (!empty($post['link']['url'])) {
+?>
+<div class="project">
+    <div class="content">
+        <h4><?= $post['title'] ?></h4>
+        <h5><?= $post['description'] ?></h5>
+        <div class="thoughts">
+            <div>
+                <p class="thought"><?= $post['thoughts'] ?></p>
+                <?php
+                    if (!empty($post['technologies'])) {
+                        echo '<div class="technologies-used"><h6>Technologies</h6>';
+                        echo '<div class="list">'.$post['technologies'].'</div>';
+                        echo '</div>';
+                    }
+                ?>
+            </div>
+        </div>
+        <div class="button-wrapper">
+            <span class="show-more">Learn More</span>
+            <?php
+                echo '<a href="'.$post['link']['url'].'" target="_blank">'.$post['link']['title'].'</a>';
+                if (!empty($post['github_link'])) {
+                    echo '<a href="'.$post['github_link']['url'].'" target="_blank">GitHub</a>';
+                }
+            ?>
+        </div>
+    </div>
+    <?php
+        echo get_image($post['image']);
+    ?>
+</div>
+<?php
+    }
+}

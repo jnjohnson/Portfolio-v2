@@ -1,8 +1,10 @@
 @import 'vars-mixins';
 @import 'common';
-// @import 'elements';
+@import 'elements';
 @import 'header';
 @import 'footer';
 
 @import 'portfolio-v1';
 @import 'archive-recipes';
+@import 'template-home';
+@import '404';

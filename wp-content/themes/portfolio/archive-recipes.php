@@ -1,7 +1,4 @@
 <?php
-    /*
-        Template Name: Recipes Archive
-    */
     global $wp_query;
     ftheme::add_script('recipes.js');
 	get_header();
@@ -12,10 +9,7 @@
         'cuisine'   => get_terms(['taxonomy' => 'cuisine']),
     ];
 ?>
-<div class="archive-recipes">
-    <div class="hero">
-
-    </div>
+<div class="archive-recipes std-content">
     <div class="main-content">
         <div class="wrap">
             <form id="search" name="search">

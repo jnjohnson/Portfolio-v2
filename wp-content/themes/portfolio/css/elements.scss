@@ -1,0 +1,34 @@
+.std-content {
+    h1 {
+        font: $sb 32px/1.2 $o;
+        margin-bottom: 0.7em;
+    }
+    h2 {
+        font: $med 32px/1.2 $o;
+        margin-bottom: 0.7em;
+    }
+    h3 {
+        font: $med 24px/1.2 $o;
+        margin-bottom: 0.7em;
+    }
+    h4 {
+        font: $med 24px/1.5 $o;
+        margin-bottom: 0.7em;
+    }
+    h5 {
+        font: $med 20px/1.2 $o;
+        margin-bottom: 0.7em;
+    }
+    p {
+        font: $reg 16px/1.5 $o;
+        margin-bottom: 0.7em;
+
+        @include mobile_width {
+            font-size: 14px;
+        }
+    }
+}
+body.menu-open {
+    overflow: hidden;
+    height: 100vh;
+}

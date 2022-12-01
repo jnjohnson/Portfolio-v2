@@ -2,13 +2,39 @@
 $o: 'Open Sans', sans-serif;
 $d: 'Dosis', sans-serif;
 
+$light: 300;
+$reg:   400;
+$med:   500;
+$sb:    600;
+$bold:  700;
+
 $white: #fff;
 $black: #000;
 
+// Homepage ide theme colors
+$ide-bg:    #1e1e1e;
+$ide-text:  rgb(12, 207, 77);
+
+$dark-gray:     #2c2c2c;
+$midnight-blue: #2e3542;
+$light-gray:    #ebebeb;
+
+$orange:        #dd6c1d;
+$magenta:       #742461;
+$deep-blue:     #0039ab;
+$mid-blue:      #22365D;
+$teal:          #517480;
 // nav height
 $nh: 56px;
 
+$tablet_width: 1040px;
 $mobile_width: 800px;
+
+@mixin tablet_width {
+    @include max_width($tablet_width) {
+        @content;
+    }
+}
 
 @mixin mobile_width {
     @include max_width($mobile_width) {

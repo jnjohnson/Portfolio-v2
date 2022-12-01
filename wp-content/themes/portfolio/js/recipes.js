@@ -94,7 +94,6 @@ function loadMoreInterval() {
             }
         }
     }, 300);
-    console.debug(interval);
 }
 
 // FILTER DROPDOWN

@@ -1,3 +1,8 @@
+.post-type-archive-recipes {
+    nav {
+        display: none;
+    }
+}
 .archive-recipes {
     background-color: $black;
     padding-top: $nh;
@@ -157,6 +162,7 @@
                 }
                 .meta {
                     background-color: rgba($black, 0.8);
+                    box-sizing: border-box;
                     color: $white;
                     align-items: center;
                     display: flex;
@@ -165,7 +171,7 @@
                     height: 100%;
                     left: 0;
                     opacity: 0;
-                    padding: 30px 60px;
+                    padding: 30px;
                     position: absolute;
                     top: 0;
                     transition: opacity 0.3s;
@@ -213,6 +219,20 @@
         }
     }
 
+    @include max_width(1069px) {
+        .main-content {
+            .recipes {
+                display: flex;
+                flex-flow: row wrap;
+                gap: 10px;
+
+                .recipe {
+                    max-width: none;
+                    width: calc(50% - 5px);
+                }
+            }
+        }
+    }
     @include mobile_width {
         .main-content {
             form {
@@ -241,7 +261,11 @@
                 }
             }
             .recipes {
-                grid-template-columns: 1fr;
+                gap: 20px;
+                
+                .recipe {
+                    width: 100%;
+                }
             }
         }
     }

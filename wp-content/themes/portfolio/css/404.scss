@@ -1,0 +1,29 @@
+.template-404 {
+    .wrap {
+        color: $white;
+        margin: 0 auto;
+        max-width: 1200px;
+        padding: 20vh 30px;
+        text-align: center;
+
+        h2 {
+            margin-top: 20px;
+        }
+        a {
+            color: $light-gray;
+            border: 2px solid $light-gray;
+            border-radius: 20px;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 40px;
+            padding: 8px 35px 10px 35px;
+            text-transform: uppercase;
+            transition: all 0.2s;
+
+            &:hover, &.open {
+                background-color: $light-gray;
+                color: $black;
+            }
+        }
+    }
+}

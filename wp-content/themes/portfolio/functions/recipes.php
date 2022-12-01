@@ -155,7 +155,7 @@
             if (!empty($terms)) {
                 foreach ($terms as $i => $term) {
                     if ($i == 0) {
-                        $string = $term->name . ' - ';
+                        $string = $term->name . ':</br>';
                     } else {
                         $string .= $term->name;
                     }
