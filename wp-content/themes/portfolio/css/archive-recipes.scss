@@ -4,15 +4,9 @@
     }
 }
 .archive-recipes {
-    background-color: $black;
-    padding-top: $nh;
+    background-color: $ide-bg;
 
     .main-content {
-        .wrap {
-            margin: 0 auto;
-            // max-width: 1400px;
-            // padding-top: 80px;
-        }
         form {
             background-color: $white;
             border-bottom: 2px solid $black;
@@ -99,9 +93,11 @@
             column-gap: 0px;
             display: grid;
             gap: 10px;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, 350px);
+            justify-content: center;
+            margin: 30px auto;
+            max-width: 1800px;
             position: relative;
-            // margin-top: 80px;
 
             &::before {
                 background-color: rgba($black, 0.5);
@@ -146,49 +142,65 @@
                 padding: 80px 0px;
             }
             .recipe {
-                max-width: 470px;
+                border-radius: 20px;
+                display: flex;
+                flex-flow: column nowrap;
+                overflow: hidden;
                 position: relative;
-                text-decoration: none;
                 
                 &:hover {
-                    .meta {
-                        opacity: 1;
+                    .image-wrap .image {
+                        transform: scale(1.1);
+                    }
+                    .details h5 {
+                        text-decoration: underline;
                     }
                 }
-                .image {
-                    background-size: cover;
-                    background-position: center;
+
+                .image-wrap {
+                    overflow: hidden;
                     padding-top: (1080/879)*100%;
+                    position: relative;
+
+                    .image {
+                        background-size: cover;
+                        background-position: center;
+                        bottom: 0;
+                        left: 0;
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+                        transition: all 0.2s;
+                    }
                 }
-                .meta {
-                    background-color: rgba($black, 0.8);
+                .details {
+                    background-color: $white;
+                    border-top: 4px solid $black;
                     box-sizing: border-box;
-                    color: $white;
-                    align-items: center;
+                    color: $black;
                     display: flex;
                     flex-flow: column nowrap;
-                    justify-content: center;
                     height: 100%;
-                    left: 0;
-                    opacity: 0;
                     padding: 30px;
-                    position: absolute;
-                    top: 0;
-                    transition: opacity 0.3s;
                     width: 100%;
-
-                    h4 {
-                        letter-spacing: 1.5px;
-                        line-height: 1.5;
+                    
+                    h5 {
+                        letter-spacing: 1px;
+                        line-height: 1.3;
                         text-align: center;
+                        text-underline-offset: 3px;
                         text-transform: uppercase;
                     }
-                    h5 {
-                        text-align: center;
+                    p.source {
+                        margin-bottom: auto;
                     }
-                    h4
-                    p.servings, p.time {
-                        text-transform: capitalize;
+                    .meta {
+                        margin-top: auto;
+
+                        p {
+                            text-transform: capitalize;
+                            margin-bottom: 0;
+                        }
                     }
                 }
             }
@@ -224,11 +236,11 @@
             .recipes {
                 display: flex;
                 flex-flow: row wrap;
-                gap: 10px;
+                gap: 20px;
 
                 .recipe {
                     max-width: none;
-                    width: calc(50% - 5px);
+                    width: calc(50% - 10px);
                 }
             }
         }
