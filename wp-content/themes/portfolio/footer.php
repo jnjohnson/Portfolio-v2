@@ -6,8 +6,8 @@
             ));
         ?>
             <div class="social">
-                <a class="github" target="_blank" href="{$about['github']}">Github <i class="fa-brands fa-github"></i></a>
-                <a class="linkedin" target="_blank" href="{$about['linkedin']}">LinkedIn <i class="fa-brands fa-linkedin"></i></a>
+                <a class="github" target="_blank" href="https://github.com/jnjohnson">Github <i class="fa-brands fa-github"></i></a>
+                <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/jamesnjohnsonjr/">LinkedIn <i class="fa-brands fa-linkedin"></i></a>
             </div>
         </div>
     </footer>
