@@ -57,18 +57,19 @@
                             $image = wp_get_attachment_image_src($img_id, 'full')[0];
                         }
                         echo '<a href="'.$link.'" class="recipe">';
-                            echo '<div class="image" style="background-image: url('.$image.')"></div>';
-                            echo '<div class="meta"><h4>'.$title.'</h4>';
+                            echo '<div class="image-wrap"><div class="image" style="background-image: url('.$image.')"></div></div>';
+                            echo '<div class="details"><h5>'.$title.'</h5>';
                             if (!empty($source)) {
-                                echo '<h5>'.$source.'</h5>';
+                                echo '<p>'.$source.'</p>';
                             }
+                            echo '<div class="meta">';
                             if (!empty($servings)) {
                                 echo '<p class="servings">'.$servings.'</p>';
                             }
                             if (!empty($time)) {
                                 echo '<p class="time">Total Time: '.$time.'</p>';
                             }
-                            echo '</div>'; // meta
+                            echo '</div></div>'; // meta, details
                         echo '</a>'; // recipe
                     }
                     $next_page_url = get_next_posts_page_link($wp_query->max_num_pages);
