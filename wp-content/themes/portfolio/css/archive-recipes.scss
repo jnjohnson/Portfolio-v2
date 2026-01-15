@@ -159,7 +159,7 @@
 
                 .image-wrap {
                     overflow: hidden;
-                    padding-top: (1080/879)*100%;
+                    padding-top: 100%;
                     position: relative;
 
                     .image {
@@ -235,11 +235,14 @@
             .recipes {
                 display: flex;
                 flex-flow: row wrap;
-                gap: 20px;
 
                 .recipe {
                     max-width: none;
-                    width: calc(50% - 10px);
+                    width: calc(50% - 30px);
+
+                    .image-wrap {
+                        padding-top: 75%;
+                    }
                 }
             }
         }
@@ -266,8 +269,6 @@
                 }
             }
             .recipes {
-                gap: 20px;
-                
                 .recipe {
                     width: 90%;
                 }
