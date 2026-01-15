@@ -188,17 +188,6 @@
             ?>
         </div>
     </div>
-<!-- CONTACT -->
-    <?php
-        $contact = get_field('contact');
-    ?>
-    <div id="contact" class="contact">
-        <div class="wrap">
-            <?php
-                echo $contact;
-            ?>
-        </div>
-    </div>
 </div> <!-- template-homepage -->
 <?php
     get_footer();
