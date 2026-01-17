@@ -61,6 +61,7 @@
         // Detects if the image has been updated.
         // If yes, use OCR API to get all of the text in the image
         public function recipe_image_OCR($post_id) {
+            $log = fopen("log.txt", "w") or die("unable to open file");
             $saved_post = get_post($post_id);
             if ($saved_post->post_type != 'recipes') {
                 return;
@@ -103,8 +104,10 @@
                 curl_close($curl);
 
                 if ($err) {
+                    fwrite($log, "cURL Error #:" . $err);
                     echo "cURL Error #:" . $err;
                 } else {
+                    fwrite($log, "response: " . $response);
                     echo $response;
                 }
                 // $this->save_recipe_parts_to_acf_fields($response['text'], $post_id);
