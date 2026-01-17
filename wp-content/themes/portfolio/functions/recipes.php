@@ -77,15 +77,37 @@
             
             if (!empty($img_url)) {
                 $curl = curl_init();
-                curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://freeocrapi.com/api',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array('file'=> new CURLFILE($img_url))));
-                $response = json_decode(curl_exec($curl), true);
+
+                curl_setopt_array($curl, [
+                    CURLOPT_URL => "https://apis-freeocr-ai.p.rapidapi.com/extract?fields=%5B%22title%22%2C%20%22page%20number%22%2C%20%22servings%22%2C%22cook%20time%22%2C%22ingredients%22%5D&format=json",
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => "",
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 30,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => "POST",
+                    CURLOPT_POSTFIELDS => "-----011000010111000001101001
+                        Content-Disposition: form-data; name='image'"
+                        .$img_url.
+                        "-----011000010111000001101001--",
+                    CURLOPT_HTTPHEADER => [
+                        "Content-Type: multipart/form-data; boundary=---011000010111000001101001",
+                        "x-rapidapi-host: apis-freeocr-ai.p.rapidapi.com",
+                        "x-rapidapi-key:" . get_option('FREE_OCR_API_KEY')
+                    ],
+                ]);
+
+                $response = curl_exec($curl);
+                $err = curl_error($curl);
+
                 curl_close($curl);
-                $this->save_recipe_parts_to_acf_fields($response['text'], $post_id);
+
+                if ($err) {
+                    echo "cURL Error #:" . $err;
+                } else {
+                    echo $response;
+                }
+                // $this->save_recipe_parts_to_acf_fields($response['text'], $post_id);
             }
         }
 
