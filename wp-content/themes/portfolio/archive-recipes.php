@@ -64,7 +64,7 @@
                             }
                             echo '<div class="meta">';
                             if (!empty($servings)) {
-                                echo '<p class="servings">'.$servings.'</p>';
+                                echo '<p class="servings">Servings: '.$servings.'</p>';
                             }
                             if (!empty($time)) {
                                 echo '<p class="time">Total Time: '.$time.'</p>';
