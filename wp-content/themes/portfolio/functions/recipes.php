@@ -2,7 +2,7 @@
     class Recipes {
         function __construct() {
             add_action('init', array($this, 'init'));
-            add_action('acf/save_post', array($this, 'recipe_image_OCR'));
+            add_action('rest_after_insert_recipes', array($this, 'recipe_image_OCR'));
             add_action('pre_get_posts', array($this, 'filter_posts'));
         }
         
@@ -19,7 +19,8 @@
                 'rewrite'           => array(
                     'slug'          => 'recipes',
                     'with_front'    => false
-                )
+                ),
+                'show_in_rest'      => true
             ));
             
             register_taxonomy('source', 'recipes', 
@@ -30,7 +31,8 @@
                     'show_ui'           => true,
                     'public'            => true,
                     'hierarchical'      => true,
-                    'show_admin_column' => true
+                    'show_admin_column' => true,
+                    'show_in_rest'      => true
                 )
             );
             register_taxonomy('meals', 'recipes',
@@ -42,7 +44,8 @@
                     'show_ui'           => true,
                     'public'            => true,
                     'hierarchical'      => true,
-                    'show_admin_column' => true
+                    'show_admin_column' => true,
+                    'show_in_rest'      => true
                 )
             );
             register_taxonomy('cuisine', 'recipes',
@@ -53,7 +56,8 @@
                     'show_ui'           => true,
                     'public'            => true,
                     'hierarchical'      => true,
-                    'show_admin_column' => true
+                    'show_admin_column' => true,
+                    'show_in_rest'      => true
                 )
             );
         }
@@ -61,6 +65,7 @@
         // Detects if the image has been updated.
         // If yes, use OCR API to get all of the text in the image
         public function recipe_image_OCR($post_id) {
+            remove_action('rest_after_insert_recipes', array($this, 'recipe_image_OCR'));
             $saved_post = get_post($post_id);
             if ($saved_post->post_type != 'recipes') {
                 return;
@@ -106,20 +111,18 @@
                     $this->save_recipe_parts_to_acf_fields($response, $post_id);
                 }
             }
+            add_action('rest_after_insert_recipes', array($this, 'recipe_image_OCR'));
         }
 
-        // Saves the recipe name, slug, page number, servings, recipe content, and total time to the post
-        // There's too much variation in how recipes are formatted (even within a book) to be able to 
-        // come up with rules to parse things out perfectly without using ML.
-        // Maybe I'll try to learn TensorFlow for the next part of this...
+        // Saves the recipe name, slug, page number, servings,
+        // recipe content, and total time to the post
         public function save_recipe_parts_to_acf_fields($response, $post_id) {
-            // Get the servings and total time
             foreach ($response as $index) {
                 switch ($index['key']) {
                     case 'title':
                         $title = ucwords(strtolower(implode(' ', $index['values'])));
-                        wp_update_post([
-                            'ID' => $post_id,
+                        $id = wp_update_post([
+                            'ID' => $post_id->ID,
                             'post_title' => $title,
                             'post_name' => str_replace(' ', '-', strtolower($title))
                         ]);
