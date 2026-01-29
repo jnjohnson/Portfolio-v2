@@ -5,7 +5,7 @@
 
     $filters = [
         'source'    => get_terms(['taxonomy' => 'source']),
-        'meals'     => get_terms(['taxonomy' => 'meals']),
+        // 'meals'     => get_terms(['taxonomy' => 'meals']),
         'cuisine'   => get_terms(['taxonomy' => 'cuisine']),
     ];
 ?>
