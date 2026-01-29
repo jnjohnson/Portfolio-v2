@@ -93,7 +93,7 @@
             column-gap: 0px;
             display: grid;
             gap: 20px;
-            grid-template-columns: repeat(auto-fit, 350px);
+            grid-template-columns: repeat(4, calc(25% - 20px));
             justify-content: center;
             margin: 30px auto;
             max-width: 1800px;
