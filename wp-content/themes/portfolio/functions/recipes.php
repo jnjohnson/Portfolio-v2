@@ -35,19 +35,19 @@
                     'show_in_rest'      => true
                 )
             );
-            register_taxonomy('meals', 'recipes',
-                array(
-                    'labels'            => array(
-                        'name'          => 'Meals',
-                        'singular_name' => 'Meal'
-                    ),
-                    'show_ui'           => true,
-                    'public'            => true,
-                    'hierarchical'      => true,
-                    'show_admin_column' => true,
-                    'show_in_rest'      => true
-                )
-            );
+            // register_taxonomy('meals', 'recipes',
+            //     array(
+            //         'labels'            => array(
+            //             'name'          => 'Meals',
+            //             'singular_name' => 'Meal'
+            //         ),
+            //         'show_ui'           => true,
+            //         'public'            => true,
+            //         'hierarchical'      => true,
+            //         'show_admin_column' => true,
+            //         'show_in_rest'      => true
+            //     )
+            // );
             register_taxonomy('cuisine', 'recipes',
                 array(
                     'labels'            => array(
@@ -137,11 +137,12 @@
                         update_field('time', strtolower($index['values'][0]), $post_id);
                         break;
                     case 'ingredients':
-                        $ingredients = implode("\r\n", $index['values']);
+                        $ingredients = '<ul><li>' . implode("</li>\r\n<li>", $index['values']) . '</li></ul>';
                         update_field('ingredients', $ingredients, $post_id);
                         break;
                     case 'recipe steps':
-                        $steps = implode("\r\n", $index['values']);
+                        $index['values'] = preg_replace('/^[0-9]+ /m', '', $index['values']);
+                        $steps = '<ol><li>' . implode("</li>\r\n<li>", $index['values']) . '</li></ol>';
                         update_field('cooking_instructions', $steps, $post_id);
                         break;
                     default:
@@ -162,7 +163,7 @@
                     ));
                 }
                 $query->set('tax_query', $tax_query);
-                $query->set('posts_per_page', 9);
+                $query->set('posts_per_page', 8);
             }
         }
 
