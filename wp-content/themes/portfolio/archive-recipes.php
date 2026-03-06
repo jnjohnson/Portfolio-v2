@@ -52,7 +52,7 @@
                         $img_id = get_field('food_image');
                         $image = '';
                         if (empty($img_id)) {
-                            $image = '/wp-content/themes/portfolio/images/drumstick2-879-1080.jpg';
+                            $image = '/wp-content/themes/portfolio/images/mise-en-place.jpg';
                         } else {
                             $image = wp_get_attachment_image_src($img_id, 'full')[0];
                         }
