@@ -167,12 +167,14 @@
             }
         }
 
-        public static function build_source_string($terms) {
+        public static function build_source_string($terms, $no_br = false) {
             $string = '';
             if (!empty($terms)) {
                 foreach ($terms as $i => $term) {
-                    if ($i == 0) {
+                    if ($i == 0 && !$no_br) {
                         $string = $term->name . ':</br>';
+                    } else if ($i == 0 && $no_br) {
+                        $string = $term->name . ': ';
                     } else {
                         $string .= $term->name;
                     }
