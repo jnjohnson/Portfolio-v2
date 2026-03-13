@@ -10,6 +10,7 @@
         $page         = get_field('page');
         $source       = Recipes::build_source_string(get_the_terms($post, 'source'), true);
         $img_id       = get_field('recipe_image');
+        $food_img_id  = get_field('food_image');
         $ingredients  = get_field('ingredients');
         $instructions = get_field('cooking_instructions');
     ?>
@@ -19,9 +20,9 @@
             <a class="recipe-header__back" href="/recipes">
                 <i class="fa fa-arrow-left" aria-hidden="true"></i> All Recipes
             </a>
-            <?php if ($img_id) : ?>
+            <?php if ($food_img_id) : ?>
             <div class="recipe-header__image-wrap">
-                <?php echo wp_get_attachment_image($img_id, 'largest_image', false, [
+                <?php echo wp_get_attachment_image($food_img_id, 'largest_image', false, [
                     'class' => 'recipe-header__image',
                     'alt'   => $title,
                 ]); ?>
@@ -58,6 +59,16 @@
         <div class="recipe-body__inner">
             <div class="recipe-body__ingredients">
                 <h2 class="recipe-section-heading">Ingredients</h2>
+                <?php
+                    $recipe_img_url = $img_id
+                        ? wp_get_attachment_image_src($img_id, 'full')[0]
+                        : null;
+                ?>
+                <?php if ($recipe_img_url) : ?>
+                <a class="recipe-img-link" href="<?php echo esc_url($recipe_img_url); ?>" target="_blank">
+                    <i class="fa fa-file-image-o" aria-hidden="true"></i> View recipe page
+                </a>
+                <?php endif; ?>
                 <div class="ingredients-list">
                     <?php echo $ingredients; ?>
                 </div>

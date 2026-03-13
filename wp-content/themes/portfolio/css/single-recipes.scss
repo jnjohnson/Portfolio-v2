@@ -130,6 +130,21 @@
 
     // ─── INGREDIENTS ─────────────────────────────────────────
 
+    .recipe-img-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font: $reg 13px/1 $o;
+        color: $teal;
+        letter-spacing: 0.5px;
+        margin-bottom: 16px;
+        transition: color 0.2s;
+
+        i { font-size: 13px; }
+
+        &:hover { color: darken($teal, 15%); }
+    }
+
     .ingredients-list {
         ul {
             list-style: none;
@@ -204,17 +219,19 @@
 
         .recipe-meta__inner { gap: 16px 24px; }
 
-        .recipe-body__inner {
-            flex-direction: column;
-            gap: 40px;
-        }
+        .recipe-body {
+            .recipe-body__inner {
+                flex-direction: column;
+                gap: 40px;
+            }
 
-        .recipe-body__ingredients {
-            flex: none;
-            width: 100%;
-            position: static;
-        }
+            .recipe-body__ingredients {
+                flex: none;
+                width: 100%;
+                position: static;
+            }
 
-        .recipe-body__directions { width: 100%; }
+            .recipe-body__directions { width: 100%; }
+        }
     }
 }
