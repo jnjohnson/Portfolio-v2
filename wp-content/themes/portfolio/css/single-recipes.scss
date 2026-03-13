@@ -1,57 +1,220 @@
 .recipe {
     background-color: $white;
-    .hero {
-        display: none;
 
-        img {
-            display: block;
+    // ─── HEADER BAND ─────────────────────────────────────────
+
+    .recipe-header {
+        background-color: $ide-bg;
+        margin-top: $nh;
+        padding: 40px 0 50px;
+
+        .recipe-header__inner {
+            max-width: 960px;
             margin: 0 auto;
-            max-height: 750px;
-            max-width: 100%;
+            padding: 0 30px;
+        }
+
+        .recipe-header__back {
+            color: $light-gray;
+            display: inline-flex;
+            align-items: center;
+            font: $reg 13px/1 $o;
+            gap: 8px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.2s;
+
+            &:hover { color: $white; }
+
+            i { font-size: 11px; }
+        }
+
+        .recipe-header__image-wrap {
+            border: 4px solid $black;
+            border-radius: 12px;
+            margin-top: 30px;
+            overflow: hidden;
+            max-height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .recipe-header__image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .recipe-header__title {
+            color: $white;
+            font: $bold 42px/1.15 $d;
+            letter-spacing: 1px;
+            margin-top: 30px;
+            text-transform: uppercase;
         }
     }
-    .main-content {
-        margin-top: $nh;
-        padding: 26px 0px 40px 0px;
 
-        h1 {
-            margin-top: 25px;
-        }
-        .wrap {
-            max-width: 1440px;
+    // ─── META STRIP ──────────────────────────────────────────
+
+    .recipe-meta {
+        background-color: $dark-gray;
+        border-bottom: 4px solid $black;
+        padding: 18px 0;
+
+        .recipe-meta__inner {
+            max-width: 960px;
             margin: 0 auto;
-            padding: 0px 20px;
+            padding: 0 30px;
+            display: flex;
+            flex-flow: row wrap;
+            gap: 24px 40px;
+            align-items: center;
         }
-        .back, .recipe-img {
-            display: block;
-            text-decoration: underline;
-        }
-        .recipe-img {
-            margin-top: 26px;
-        }
-        .meta {
-            margin-top: 15px;
-        }
-        .ingredients, .directions {
-            margin-top: 30px;
 
-            ul, ol {
-                margin-top: 10px;
-                margin-left: 20px;
-                li {
-                    line-height: 1.5;
+        .recipe-meta__item {
+            align-items: center;
+            color: $light-gray;
+            display: flex;
+            font: $reg 15px/1 $o;
+            gap: 10px;
 
-                    &:nth-of-type(n+2) {
-                        margin-top: 5px;
-                    }
-                }
+            i {
+                color: $orange;
+                font-size: 16px;
+                width: 18px;
+                text-align: center;
             }
         }
     }
 
-    @include mobile_width {
-        .main-content {
-            margin-top: $nh-mobile;
+    // ─── BODY: TWO-COLUMN ────────────────────────────────────
+
+    .recipe-body {
+        padding: 50px 0 80px;
+
+        .recipe-body__inner {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            flex-flow: row nowrap;
+            gap: 60px;
+            align-items: flex-start;
         }
+
+        .recipe-body__ingredients {
+            flex: 0 0 300px;
+            position: sticky;
+            top: calc(#{$nh} + 20px);
+        }
+
+        .recipe-body__directions {
+            flex: 1 1 0;
+            min-width: 0;
+        }
+    }
+
+    // ─── SECTION HEADINGS ────────────────────────────────────
+
+    .recipe-section-heading {
+        border-bottom: 4px solid $black;
+        font: $bold 20px/1 $d;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        text-transform: uppercase;
+    }
+
+    // ─── INGREDIENTS ─────────────────────────────────────────
+
+    .ingredients-list {
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                line-height: 1.5;
+                padding: 8px 0;
+                border-bottom: 1px solid $light-gray;
+                font: $reg 15px/1.5 $o;
+
+                &:first-child { border-top: 1px solid $light-gray; }
+            }
+        }
+    }
+
+    // ─── INSTRUCTIONS (CSS counter steps) ────────────────────
+
+    .recipe-body__directions {
+        ol {
+            list-style: none;
+            counter-reset: step-counter;
+            margin: 0;
+            padding: 0;
+
+            li {
+                counter-increment: step-counter;
+                display: flex;
+                gap: 18px;
+                align-items: flex-start;
+                font: $reg 16px/1.6 $o;
+                padding: 16px 0;
+                border-bottom: 1px solid $light-gray;
+
+                &::before {
+                    content: counter(step-counter);
+                    background-color: $ide-bg;
+                    border-radius: 50%;
+                    color: $white;
+                    flex-shrink: 0;
+                    font: $bold 13px/1 $d;
+                    height: 28px;
+                    width: 28px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-top: 3px;
+                }
+
+                &:first-child { border-top: 1px solid $light-gray; }
+            }
+        }
+    }
+
+    // ─── RESPONSIVE ──────────────────────────────────────────
+
+    @include tablet_width {
+        .recipe-body__ingredients {
+            flex: 0 0 260px;
+        }
+    }
+
+    @include mobile_width {
+        .recipe-header {
+            margin-top: $nh-mobile;
+            padding: 24px 0 32px;
+
+            .recipe-header__title { font-size: 28px; }
+            .recipe-header__image-wrap { max-height: 280px; }
+        }
+
+        .recipe-meta__inner { gap: 16px 24px; }
+
+        .recipe-body__inner {
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .recipe-body__ingredients {
+            flex: none;
+            width: 100%;
+            position: static;
+        }
+
+        .recipe-body__directions { width: 100%; }
     }
 }
