@@ -8,8 +8,8 @@
 
     .main-content {
         form {
-            background-color: $white;
-            border-bottom: 2px solid $black;
+            background-color: $ide-bg;
+            border-bottom: 4px solid $black;
             position: sticky;
             top: 0px;
             z-index: 100;
@@ -20,12 +20,16 @@
                 padding: 30px 30px 30px 30px;
             }
             input[type="search"] {
-                border: 1px solid $black;
+                background: transparent;
+                border: 1px solid $light-gray;
                 border-radius: 20px;
+                color: $white;
                 display: block;
                 margin: 0 auto;
                 padding: 10px 20px;
                 width: 100%;
+
+                &::placeholder { color: rgba($white, 0.4); }
             }
             .filters {
                 align-items: flex-start;
@@ -44,14 +48,16 @@
                         }
                     }
                     p {
+                        color: $light-gray;
                         cursor: pointer;
-                        font: 24px/1 $o;
+                        font: $bold 13px/1 $d;
+                        letter-spacing: 1px;
                         margin: 0px;
                         position: relative;
-                        text-transform: capitalize;
+                        text-transform: uppercase;
 
                         &::after {
-                            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M0 7.33l2.829-2.83 9.175 9.339 9.167-9.339 2.829 2.83-11.996 12.17z'/%3E%3C/svg%3E");
+                            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M0 7.33l2.829-2.83 9.175 9.339 9.167-9.339 2.829 2.83-11.996 12.17z'/%3E%3C/svg%3E");
                             background-position: center;
                             background-size: cover;
                             content: '';
@@ -75,9 +81,11 @@
                             margin-top: 20px;
                         }
                         label {
+                            color: $light-gray;
                             cursor: pointer;
                             align-items: center;
                             display: flex;
+                            font: $reg 14px/1 $o;
                             gap: 10px;
                             margin: 0px;
 
@@ -152,8 +160,12 @@
                     .image-wrap .image {
                         transform: scale(1.1);
                     }
-                    .details h5 {
-                        text-decoration: underline;
+                    .details {
+                        border-top-color: $orange;
+
+                        h5 {
+                            text-decoration: underline;
+                        }
                     }
                 }
 
@@ -182,23 +194,41 @@
                     flex-flow: column nowrap;
                     height: 100%;
                     padding: 30px;
+                    transition: border-top-color 0.2s;
                     width: 100%;
-                    
+
                     h5 {
+                        font-family: $d;
                         letter-spacing: 1px;
                         line-height: 1.3;
                         text-underline-offset: 3px;
                         text-transform: uppercase;
                     }
-                    p.source {
+                    & > p {
+                        color: $teal;
+                        font: $reg 13px/1.4 $o;
                         margin-bottom: auto;
                     }
                     .meta {
                         margin-top: auto;
 
                         p {
+                            color: $dark-gray;
+                            font: $reg 13px/1.4 $o;
                             text-transform: capitalize;
                             margin-bottom: 0;
+                        }
+                        p.servings::before {
+                            content: '\f0c0';
+                            font-family: FontAwesome;
+                            color: $orange;
+                            margin-right: 6px;
+                        }
+                        p.time::before {
+                            content: '\f017';
+                            font-family: FontAwesome;
+                            color: $orange;
+                            margin-right: 6px;
                         }
                     }
                 }
