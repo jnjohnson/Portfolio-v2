@@ -6,7 +6,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A WordPress theme (`wp-content/themes/portfolio/`) for a personal portfolio site. It includes a homepage with an animated IDE-style hero, a filterable recipe archive with OCR-powered auto-population, and portfolio project cards driven by ACF fields.
 
-This is a local WordPress installation — there is no separate dev server to start. The theme is served directly through WordPress/PHP.
+WordPress core is not tracked in this repo. Run it locally with Docker (`docker-compose.yml` at the repo root):
+
+```bash
+docker compose up -d                                   # http://localhost:8080 (PHP 8.5)
+docker compose run --rm cli plugin list                # WP-CLI
+docker compose exec wordpress tail -f /var/www/html/wp-content/debug.log
+```
+
+- Put a `.sql` dump in `db/` before the first `up` to auto-import it (`*.sql` is gitignored).
+- `FREE_OCR_API_KEY` is read from a gitignored `.env` file.
+- To test another PHP version, change the `php8.5` image tags.
+
+The minimum supported PHP is **8.2.35** (security floor). Composer enforces this via `vendor/composer/platform_check.php`.
 
 ## Theme Directory
 
@@ -14,11 +26,12 @@ All theme work happens in `wp-content/themes/portfolio/`.
 
 ## SCSS Compilation
 
-There is **no Node.js build step**. SCSS is compiled server-side using the bundled `scssphp` library:
+There is **no Node.js build step**. SCSS is compiled server-side by `scssphp/scssphp` 2.x, installed via Composer in the theme. `vendor/` is committed, so deploys need no Composer:
 
 - Edit any `.scss` file in `css/`
 - The browser requests `css/style.php?p=style.scss`, which compiles on the fly
-- Compiled output is cached in `css/scss_cache/`
+- Compiled output is cached as `css/scss_cache/style-<mtime>.css`
+- To update the compiler, run `composer update` in the theme directory. `config.platform.php` is pinned to 8.2.35 so the lock stays installable on the minimum PHP version.
 - Cache-busting version is set automatically via `filemtime()` of the newest `.scss` file
 
 To force recompilation, touch any `.scss` file or clear the `css/scss_cache/` directory.
