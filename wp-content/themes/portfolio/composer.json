@@ -1,0 +1,15 @@
+{
+    "name": "jnjohnson/portfolio-theme",
+    "description": "Portfolio WordPress theme",
+    "type": "wordpress-theme",
+    "require": {
+        "php": ">=8.2.35",
+        "scssphp/scssphp": "^2.1"
+    },
+    "config": {
+        "platform": {
+            "php": "8.2.35"
+        },
+        "optimize-autoloader": true
+    }
+}
