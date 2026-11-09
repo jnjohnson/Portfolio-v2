@@ -29,3 +29,6 @@ license.txt
 readme.html
 xmlrpc.php
 phpMyAdmin-5.2.0-english/
+
+# ignore .claude folder
+.claude
