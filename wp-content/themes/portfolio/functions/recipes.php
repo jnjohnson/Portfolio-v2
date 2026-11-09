@@ -74,11 +74,12 @@
             }
 
             // Checks if the image was updated when the post was saved
-            $img_id = get_fields($post_id)['recipe_image'];
+            $img_id = get_field('recipe_image', $post_id);
             // $new_img_id = $_POST['acf']['field_631e6695786ff'];
             // if ($img_id == $new_img_id) return;
 
-            $img_url = wp_get_attachment_image_src($img_id, 'full')[0];
+            $img_src = $img_id ? wp_get_attachment_image_src($img_id, 'full') : false;
+            $img_url = $img_src ? $img_src[0] : '';
             
             if (!empty($img_url)) {
                 $curl = curl_init();
@@ -102,9 +103,7 @@
             
                 $response = json_decode(curl_exec($curl), true);
                 $err = curl_error($curl);
-                
-                curl_close($curl);
-                
+
                 if ($err) {
                     echo "cURL Error #:" . $err;
                 } else {
@@ -156,6 +155,10 @@
             if (!is_admin() && $query->is_main_query()) {
                 $tax_query = array('relation' => 'AND');
                 foreach ($_GET as $key => $val) {
+                    // Ignore non-taxonomy params (utm_*, preview, etc.) and array values
+                    if (!is_string($val) || !taxonomy_exists($key)) {
+                        continue;
+                    }
                     array_push($tax_query, array(
                         'taxonomy'  => $key,
                         'field'     => 'slug',
