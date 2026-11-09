@@ -19,8 +19,6 @@
 
 	$plans = $VARS['plans'];
 
-	$currency_symbol = $VARS['currency_symbol'];
-
 	$features_plan_map = array();
 	foreach ( $plans as $plan ) {
 		if (!empty($plan->features) && is_array($plan->features)) {
@@ -35,7 +33,6 @@
 
 		// Add support as a feature.
 		if ( ! empty( $plan->support_email ) ||
-		     ! empty( $plan->support_skype ) ||
 		     ! empty( $plan->support_phone ) ||
 		     true === $plan->is_success_manager
 		) {
@@ -79,11 +76,11 @@
 									 */
 									if ( 1 == $pricing->licenses ) {
 										if ( $pricing->has_annual() ) {
-											echo "{$currency_symbol}{$pricing->annual_price} / " . fs_esc_html_x_inline( 'year', 'as annual period', 'year', $plugin->slug );
+											echo "\${$pricing->annual_price} / " . fs_esc_html_x_inline( 'year', 'as annual period', 'year', $plugin->slug );
 										} else if ( $pricing->has_monthly() ) {
-											echo "{$currency_symbol}{$pricing->monthly_price} / " . fs_esc_html_x_inline( 'mo', 'as monthly period', 'mo', $plugin->slug );
+											echo "\${$pricing->monthly_price} / " . fs_esc_html_x_inline( 'mo', 'as monthly period', 'mo', $plugin->slug );
 										} else {
-											echo "{$currency_symbol}{$pricing->lifetime_price}";
+											echo "\${$pricing->lifetime_price}";
 										}
 									}
 								}
